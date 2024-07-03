@@ -1,4 +1,4 @@
 pandas
 xlrd 
 openpyxl
-tkinter
+tkinterdnd2
