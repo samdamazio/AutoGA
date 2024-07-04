@@ -4,11 +4,18 @@ import pandas as pd
 import tkinter as tk
 from tkinter import filedialog, messagebox
 from tkinterdnd2 import TkinterDnD, DND_FILES
+import sys
 
 # Carregar a lista de nomes comuns dos arquivos CSV
 def load_common_names():
-    fem_names_path = "db/ibge-fem-10000.csv"
-    mas_names_path = "db/ibge-mas-10000.csv"
+    if getattr(sys, 'frozen', False):
+        # If the application is run as a bundle, the path is relative to the bundle
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    
+    fem_names_path = os.path.join(base_path, 'db', 'ibge-fem-10000.csv')
+    mas_names_path = os.path.join(base_path, 'db', 'ibge-mas-10000.csv')
     
     fem_names_df = pd.read_csv(fem_names_path, usecols=[0], header=None, names=["name"])
     mas_names_df = pd.read_csv(mas_names_path, usecols=[0], header=None, names=["name"])
@@ -131,3 +138,10 @@ root.drop_target_register(DND_FILES)
 root.dnd_bind('<<Drop>>', drop)
 
 root.mainloop()
+
+if __name__ == '__main__':
+    try:
+        root.mainloop()
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+        print(str(e))
