@@ -1,6 +1,9 @@
 # AutoGA
 Ferramenta de automaçao para transformar planilhas entre dois sistemas de automação (Extração de contatos  whatsapp -> botConversas) 
 
+# Clonando o projeto pra sua maquina
+https://github.com/samdamazio/AutoGA.git
+
 # AMBIENTE VIRTUAL
 ## criando
 python3 -m venv venv
